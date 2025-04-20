@@ -1,3 +1,7 @@
-# Godot 4+ specific ignores
+# Godot-specific files and folders to ignore
+.import/
 .godot/
-/android/
+.mono/
+.idea/
+.vs/
+export_presets.cfg
