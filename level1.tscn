@@ -1,0 +1,177 @@
+[gd_scene load_steps=11 format=3 uid="uid://bghv2r2t3eime"]
+
+[ext_resource type="PackedScene" uid="uid://bioiunfoitq1f" path="res://paddle/paddle.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bm654tu52y0vo" path="res://level1.gd" id="1_lquwl"]
+[ext_resource type="Script" uid="uid://dq0bkjtrfbfx6" path="res://area_2d.gd" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dedxt3isrkgfy" path="res://ball/Ball.tscn" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://ltqysndy2vrm" path="res://images/level2.jpg" id="2_i2041"]
+[ext_resource type="PackedScene" uid="uid://ci0fmh0j23ir" path="res://bricks/brick.tscn" id="3_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(1280, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(1280, 20)
+
+[node name="level1" type="Node2D"]
+script = ExtResource("1_lquwl")
+metadata/_edit_horizontal_guides_ = [-3194.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(596, 342)
+scale = Vector2(4.27273, 3.84151)
+texture = ExtResource("2_i2041")
+
+[node name="Paddle" parent="." instance=ExtResource("1_0xm2m")]
+position = Vector2(577, 609)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+position = Vector2(1163, 356)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="DownWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(10, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DownWall"]
+position = Vector2(616, -35)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Area2D" type="Area2D" parent="Walls/DownWall"]
+position = Vector2(616, -728)
+script = ExtResource("2_1bvp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DownWall/Area2D"]
+position = Vector2(0, 693)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Walls/DownWall"]
+position = Vector2(611, -37.25)
+scale = Vector2(59.3, 2.075)
+
+[node name="Ball" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(540, 574)
+
+[node name="BrickGrid" type="Node2D" parent="."]
+position = Vector2(78, -9)
+
+[node name="Brick" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(887, 31)
+
+[node name="Brick2" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(176, -6)
+
+[node name="Brick3" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(332, -6)
+
+[node name="Brick4" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(488, -6)
+
+[node name="Brick5" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(128, 68)
+
+[node name="Brick6" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(266, 142)
+
+[node name="Brick7" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(59, 31)
+
+[node name="Brick8" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(335, 179)
+
+[node name="Brick9" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(404, 216)
+
+[node name="Brick10" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(71, -6)
+
+[node name="Brick11" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(800, -6)
+
+[node name="Brick12" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(644, -6)
+
+[node name="Brick13" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(-10, -6)
+
+[node name="Brick14" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(818, 68)
+
+[node name="Brick15" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(749, 105)
+
+[node name="Brick16" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(196, 105)
+
+[node name="Brick17" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(956, -6)
+
+[node name="Brick18" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(680, 142)
+
+[node name="Brick19" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(473, 253)
+
+[node name="Brick20" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(611, 179)
+
+[node name="Brick21" parent="BrickGrid" instance=ExtResource("3_h2yge")]
+position = Vector2(542, 216)
+
+[node name="Level1Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverUI/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER
+"
+
+[node name="Button" type="Button" parent="CanvasLayer/GameOverUI/VBoxContainer"]
+layout_mode = 2
+text = "RETRY
+"
+
+[node name="Button2" type="Button" parent="CanvasLayer/GameOverUI/VBoxContainer"]
+layout_mode = 2
+text = "MAIN MENU"
+
+[connection signal="body_entered" from="Walls/DownWall/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="Walls/DownWall/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

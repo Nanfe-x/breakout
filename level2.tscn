@@ -1,0 +1,394 @@
+[gd_scene load_steps=13 format=3 uid="uid://bc2gneqcosbcw"]
+
+[ext_resource type="Script" uid="uid://bmlm3tbpyd1m5" path="res://level2.gd" id="1_8i3m3"]
+[ext_resource type="Texture2D" uid="uid://b2qjdg4pfklid" path="res://images/images.jpg" id="2_rmy57"]
+[ext_resource type="PackedScene" uid="uid://bioiunfoitq1f" path="res://paddle/paddle.tscn" id="3_qulpo"]
+[ext_resource type="Script" uid="uid://dq0bkjtrfbfx6" path="res://area_2d.gd" id="4_jifot"]
+[ext_resource type="PackedScene" uid="uid://dedxt3isrkgfy" path="res://ball/Ball.tscn" id="5_3opl0"]
+[ext_resource type="PackedScene" uid="uid://dfihx8pn1fcve" path="res://bricks/brick1.tscn" id="7_8i3m3"]
+[ext_resource type="Script" uid="uid://beyddppspko4" path="res://gameove.gd" id="7_s8oj7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(1280, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(1280, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5vw27"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_8i3m3")
+metadata/_edit_horizontal_guides_ = [-3194.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(571, 324.75)
+scale = Vector2(3.89, 3.86607)
+texture = ExtResource("2_rmy57")
+
+[node name="Paddle" parent="." instance=ExtResource("3_qulpo")]
+position = Vector2(628, 603)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+position = Vector2(1163, 356)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="DownWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(10, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DownWall"]
+position = Vector2(604, -6)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Area2D" type="Area2D" parent="Walls/DownWall"]
+position = Vector2(616, -728)
+script = ExtResource("4_jifot")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DownWall/Area2D"]
+position = Vector2(-10, 725)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Walls/DownWall"]
+position = Vector2(572, 2)
+scale = Vector2(59.3, 2.075)
+
+[node name="Ball" parent="." instance=ExtResource("5_3opl0")]
+position = Vector2(595, 560)
+
+[node name="GameoverUI" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("7_s8oj7")
+
+[node name="ColorRect" type="ColorRect" parent="GameoverUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.255659, 0.255659, 0.255659, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameoverUI"]
+offset_left = 360.0
+offset_top = 298.0
+offset_right = 831.0
+offset_bottom = 566.0
+
+[node name="GameOver" type="Label" parent="GameoverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxTexture_5vw27")
+text = "Game over"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Restart" type="Button" parent="GameoverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+
+[node name="Main Menu" type="Button" parent="GameoverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="BrickGrid" type="Node2D" parent="."]
+position = Vector2(335, 72)
+
+[node name="Brick1" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(145, 212)
+
+[node name="Brick2" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 258)
+
+[node name="Brick3" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 258)
+
+[node name="Brick4" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 281)
+
+[node name="Brick5" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 281)
+
+[node name="Brick6" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 304)
+
+[node name="Brick7" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 304)
+
+[node name="Brick8" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 327)
+
+[node name="Brick9" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 327)
+
+[node name="Brick10" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 350)
+
+[node name="Brick11" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 327)
+
+[node name="Brick12" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 304)
+
+[node name="Brick13" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 281)
+
+[node name="Brick14" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 258)
+
+[node name="Brick15" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 235)
+
+[node name="Brick16" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 212)
+
+[node name="Brick17" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 189)
+
+[node name="Brick18" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(270, 166)
+
+[node name="Brick19" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 166)
+
+[node name="Brick20" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 166)
+
+[node name="Brick21" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 166)
+
+[node name="Brick22" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 166)
+
+[node name="Brick23" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(145, 166)
+
+[node name="Brick24" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(120, 166)
+
+[node name="Brick25" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 143)
+
+[node name="Brick26" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 143)
+
+[node name="Brick27" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 143)
+
+[node name="Brick28" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 143)
+
+[node name="Brick29" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(145, 143)
+
+[node name="Brick30" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 120)
+
+[node name="Brick31" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 120)
+
+[node name="Brick32" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 120)
+
+[node name="Brick33" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(189, 255)
+
+[node name="Brick34" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(395, 143)
+
+[node name="Brick35" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 143)
+
+[node name="Brick36" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 143)
+
+[node name="Brick37" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 143)
+
+[node name="Brick38" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 143)
+
+[node name="Brick39" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(120, 189)
+
+[node name="Brick40" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(145, 189)
+
+[node name="Brick41" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 189)
+
+[node name="Brick42" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 189)
+
+[node name="Brick43" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(120, 212)
+
+[node name="Brick44" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 189)
+
+[node name="Brick45" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 189)
+
+[node name="Brick46" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 212)
+
+[node name="Brick47" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 212)
+
+[node name="Brick48" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 212)
+
+[node name="Brick49" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 212)
+
+[node name="Brick50" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(145, 235)
+
+[node name="Brick51" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 235)
+
+[node name="Brick52" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 235)
+
+[node name="Brick53" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(220, 235)
+
+[node name="Brick54" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(245, 235)
+
+[node name="Brick55" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(170, 258)
+
+[node name="Brick56" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 281)
+
+[node name="Brick57" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 120)
+
+[node name="Brick58" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(420, 212)
+
+[node name="Brick59" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(395, 212)
+
+[node name="Brick60" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 212)
+
+[node name="Brick61" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 212)
+
+[node name="Brick62" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 212)
+
+[node name="Brick63" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 212)
+
+[node name="Brick64" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(420, 189)
+
+[node name="Brick65" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(395, 189)
+
+[node name="Brick66" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 189)
+
+[node name="Brick67" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 189)
+
+[node name="Brick68" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 189)
+
+[node name="Brick69" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 189)
+
+[node name="Brick70" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(420, 166)
+
+[node name="Brick71" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(395, 166)
+
+[node name="Brick72" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 166)
+
+[node name="Brick73" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 166)
+
+[node name="Brick74" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 166)
+
+[node name="Brick75" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 166)
+
+[node name="Brick76" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 120)
+
+[node name="Brick77" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 120)
+
+[node name="Brick78" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(195, 258)
+
+[node name="Brick80" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 304)
+
+[node name="Brick81" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 304)
+
+[node name="Brick82" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 281)
+
+[node name="Brick83" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 281)
+
+[node name="Brick84" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 281)
+
+[node name="Brick85" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 258)
+
+[node name="Brick86" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 258)
+
+[node name="Brick87" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 258)
+
+[node name="Brick88" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 258)
+
+[node name="Brick89" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(395, 235)
+
+[node name="Brick90" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(370, 235)
+
+[node name="Brick91" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(345, 235)
+
+[node name="Brick92" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(320, 235)
+
+[node name="Brick93" parent="BrickGrid" instance=ExtResource("7_8i3m3")]
+position = Vector2(295, 235)
+
+[connection signal="body_entered" from="Walls/DownWall/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="Walls/DownWall/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="pressed" from="GameoverUI/VBoxContainer/Restart" to="GameoverUI" method="_on_restart_pressed"]
+[connection signal="pressed" from="GameoverUI/VBoxContainer/Main Menu" to="GameoverUI" method="_on_main_menu_pressed"]

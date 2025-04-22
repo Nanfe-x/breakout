@@ -1,0 +1,599 @@
+[gd_scene load_steps=13 format=3 uid="uid://dkshxp6opqrtp"]
+
+[ext_resource type="Script" uid="uid://dq5inh24jv5qj" path="res://level3.gd" id="1_bmsap"]
+[ext_resource type="Texture2D" uid="uid://boj27x8oao1u" path="res://images/level3.jpg" id="2_bmsap"]
+[ext_resource type="PackedScene" uid="uid://bioiunfoitq1f" path="res://paddle/paddle.tscn" id="3_8x87a"]
+[ext_resource type="Script" uid="uid://dq0bkjtrfbfx6" path="res://area_2d.gd" id="4_ci4mn"]
+[ext_resource type="PackedScene" uid="uid://dedxt3isrkgfy" path="res://ball/Ball.tscn" id="5_sotx7"]
+[ext_resource type="Script" uid="uid://beyddppspko4" path="res://gameove.gd" id="7_7oc4e"]
+[ext_resource type="PackedScene" uid="uid://dj3fmm7n5y162" path="res://bricks/brick2.tscn" id="7_bmsap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(1280, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
+size = Vector2(1280, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5vw27"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_bmsap")
+metadata/_edit_horizontal_guides_ = [-3194.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(571, 324.75)
+scale = Vector2(3.89, 3.86607)
+texture = ExtResource("2_bmsap")
+
+[node name="Paddle" parent="." instance=ExtResource("3_8x87a")]
+position = Vector2(628, 603)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+position = Vector2(1163, 356)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="DownWall" type="StaticBody2D" parent="Walls"]
+position = Vector2(10, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DownWall"]
+position = Vector2(616, -35)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Area2D" type="Area2D" parent="Walls/DownWall"]
+position = Vector2(616, -728)
+script = ExtResource("4_ci4mn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DownWall/Area2D"]
+position = Vector2(0, 693)
+shape = SubResource("RectangleShape2D_272bh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Walls/DownWall"]
+position = Vector2(611, -37.25)
+scale = Vector2(59.3, 2.075)
+
+[node name="Ball" parent="." instance=ExtResource("5_sotx7")]
+position = Vector2(595, 560)
+
+[node name="GameoverUI" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("7_7oc4e")
+
+[node name="ColorRect" type="ColorRect" parent="GameoverUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.255659, 0.255659, 0.255659, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameoverUI"]
+offset_left = 360.0
+offset_top = 298.0
+offset_right = 831.0
+offset_bottom = 566.0
+
+[node name="GameOver" type="Label" parent="GameoverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxTexture_5vw27")
+text = "Game over"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Restart" type="Button" parent="GameoverUI/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+
+[node name="Main Menu" type="Button" parent="GameoverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[node name="BrickGrid" type="Node2D" parent="."]
+position = Vector2(1, 44)
+
+[node name="Brick2" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(400, -14)
+
+[node name="Brick3" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(343, -13)
+
+[node name="Brick4" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(285, -11)
+
+[node name="Brick5" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(229, -11)
+
+[node name="Brick6" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(172, -11)
+
+[node name="Brick7" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(116, -9)
+
+[node name="Brick8" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(59, -9)
+
+[node name="Brick9" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(2, -10)
+
+[node name="Brick10" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1083, -34)
+
+[node name="Brick11" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1028, -33)
+
+[node name="Brick12" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(972, -35)
+
+[node name="Brick13" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(912, -34)
+
+[node name="Brick14" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(854, -34)
+
+[node name="Brick15" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(795, -35)
+
+[node name="Brick16" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(737, -37)
+
+[node name="Brick17" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(679, -38)
+
+[node name="Brick18" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(622, -41)
+
+[node name="Brick19" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(564, -41)
+
+[node name="Brick20" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(510, -41)
+
+[node name="Brick21" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(452, -42)
+
+[node name="Brick22" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(396, -42)
+
+[node name="Brick23" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(340, -42)
+
+[node name="Brick24" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(284, -42)
+
+[node name="Brick25" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(228, -41)
+
+[node name="Brick26" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(172, -41)
+
+[node name="Brick27" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(117, -40)
+
+[node name="Brick28" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(59, -41)
+
+[node name="Brick29" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(3, -40)
+
+[node name="Brick30" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1082, -62)
+
+[node name="Brick31" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1026, -63)
+
+[node name="Brick32" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(970, -65)
+
+[node name="Brick33" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(912, -65)
+
+[node name="Brick34" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(853, -65)
+
+[node name="Brick35" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(792, -66)
+
+[node name="Brick36" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(736, -67)
+
+[node name="Brick37" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(678, -68)
+
+[node name="Brick38" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(622, -69)
+
+[node name="Brick39" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(564, -70)
+
+[node name="Brick40" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(508, -70)
+
+[node name="Brick41" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(452, -70)
+
+[node name="Brick42" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(396, -70)
+
+[node name="Brick43" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(340, -70)
+
+[node name="Brick44" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(284, -70)
+
+[node name="Brick45" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(228, -70)
+
+[node name="Brick46" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(172, -70)
+
+[node name="Brick47" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(116, -70)
+
+[node name="Brick48" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(60, -70)
+
+[node name="Brick49" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(4, -70)
+
+[node name="Brick50" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1025, 57)
+
+[node name="Brick51" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(977, 57)
+
+[node name="Brick52" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(926, 56)
+
+[node name="Brick53" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(865, 52)
+
+[node name="Brick54" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(807, 49)
+
+[node name="Brick55" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(750, 51)
+
+[node name="Brick56" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(692, 49)
+
+[node name="Brick57" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(634, 46)
+
+[node name="Brick58" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(573, 46)
+
+[node name="Brick59" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(517, 49)
+
+[node name="Brick60" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(459, 54)
+
+[node name="Brick61" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(399, 53)
+
+[node name="Brick62" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(345, 53)
+
+[node name="Brick63" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(287, 53)
+
+[node name="Brick64" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(229, 53)
+
+[node name="Brick65" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(174, 54)
+
+[node name="Brick66" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(114, 56)
+
+[node name="Brick67" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(55, 53)
+
+[node name="Brick68" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1, 53)
+
+[node name="Brick69" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1079, 26)
+
+[node name="Brick70" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1027, 28)
+
+[node name="Brick71" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(973, 23)
+
+[node name="Brick72" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(919, 25)
+
+[node name="Brick73" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(862, 22)
+
+[node name="Brick74" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(807, 24)
+
+[node name="Brick75" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(749, 23)
+
+[node name="Brick76" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(692, 21)
+
+[node name="Brick77" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(634, 17)
+
+[node name="Brick78" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(572, 15)
+
+[node name="Brick79" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(516, 16)
+
+[node name="Brick80" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(460, 16)
+
+[node name="Brick81" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(403, 16)
+
+[node name="Brick82" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(344, 15)
+
+[node name="Brick83" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(284, 18)
+
+[node name="Brick84" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(228, 21)
+
+[node name="Brick85" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(172, 23)
+
+[node name="Brick86" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(115, 24)
+
+[node name="Brick87" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(58, 23)
+
+[node name="Brick88" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(2, 21)
+
+[node name="Brick89" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1080, -5)
+
+[node name="Brick90" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1027, -4)
+
+[node name="Brick91" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(969, -5)
+
+[node name="Brick92" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(910, -3)
+
+[node name="Brick93" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(851, -6)
+
+[node name="Brick94" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(793, -7)
+
+[node name="Brick95" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(735, -8)
+
+[node name="Brick96" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(678, -9)
+
+[node name="Brick97" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(624, -10)
+
+[node name="Brick98" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(565, -13)
+
+[node name="Brick99" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(510, -15)
+
+[node name="Brick100" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(455, -13)
+
+[node name="Brick101" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(462, 147)
+
+[node name="Brick102" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(406, 147)
+
+[node name="Brick103" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(350, 145)
+
+[node name="Brick104" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(289, 142)
+
+[node name="Brick105" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(232, 145)
+
+[node name="Brick106" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(173, 147)
+
+[node name="Brick107" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(113, 145)
+
+[node name="Brick108" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(57, 144)
+
+[node name="Brick109" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(2, 143)
+
+[node name="Brick110" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1082, 120)
+
+[node name="Brick111" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1036, 123)
+
+[node name="Brick112" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(983, 122)
+
+[node name="Brick113" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(927, 122)
+
+[node name="Brick114" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(870, 121)
+
+[node name="Brick115" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(811, 116)
+
+[node name="Brick116" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(752, 114)
+
+[node name="Brick117" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(696, 111)
+
+[node name="Brick118" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(635, 113)
+
+[node name="Brick119" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(579, 114)
+
+[node name="Brick120" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(519, 116)
+
+[node name="Brick121" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(461, 114)
+
+[node name="Brick122" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(404, 114)
+
+[node name="Brick123" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(348, 113)
+
+[node name="Brick124" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(288, 111)
+
+[node name="Brick125" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(230, 116)
+
+[node name="Brick126" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(174, 120)
+
+[node name="Brick127" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(113, 115)
+
+[node name="Brick128" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(59, 115)
+
+[node name="Brick129" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(3, 113)
+
+[node name="Brick130" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1080, 88)
+
+[node name="Brick131" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1027, 89)
+
+[node name="Brick132" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(980, 86)
+
+[node name="Brick133" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(926, 85)
+
+[node name="Brick134" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(869, 82)
+
+[node name="Brick135" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(810, 80)
+
+[node name="Brick136" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(752, 78)
+
+[node name="Brick137" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(697, 79)
+
+[node name="Brick138" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(637, 79)
+
+[node name="Brick139" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(580, 83)
+
+[node name="Brick140" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(520, 86)
+
+[node name="Brick141" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(463, 86)
+
+[node name="Brick142" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(407, 85)
+
+[node name="Brick143" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(348, 85)
+
+[node name="Brick144" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(293, 83)
+
+[node name="Brick145" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(235, 83)
+
+[node name="Brick146" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(175, 87)
+
+[node name="Brick147" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(113, 86)
+
+[node name="Brick148" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(56, 85)
+
+[node name="Brick149" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1, 82)
+
+[node name="Brick150" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1079, 56)
+
+[node name="Brick151" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1038, 151)
+
+[node name="Brick152" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(983, 153)
+
+[node name="Brick153" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(927, 152)
+
+[node name="Brick154" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(869, 149)
+
+[node name="Brick155" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(810, 146)
+
+[node name="Brick156" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(751, 146)
+
+[node name="Brick157" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(693, 145)
+
+[node name="Brick158" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(634, 145)
+
+[node name="Brick159" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(578, 144)
+
+[node name="Brick160" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(520, 147)
+
+[node name="Brick161" parent="BrickGrid" instance=ExtResource("7_bmsap")]
+position = Vector2(1083, 152)
+
+[connection signal="body_entered" from="Walls/DownWall/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="Walls/DownWall/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="pressed" from="GameoverUI/VBoxContainer/Restart" to="GameoverUI" method="_on_restart_pressed"]
+[connection signal="pressed" from="GameoverUI/VBoxContainer/Main Menu" to="GameoverUI" method="_on_main_menu_pressed"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://dib1lvv4fqn2i"]
+
+[ext_resource type="Script" uid="uid://dtcd0tfmfss81" path="res://levels.gd" id="1_5k54k"]
+[ext_resource type="Texture2D" uid="uid://dw5wmilssqgh5" path="res://images/level.jpg" id="2_hbfth"]
+
+[node name="Levels" type="CanvasLayer"]
+script = ExtResource("1_5k54k")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1148.0
+offset_bottom = 642.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer"]
+position = Vector2(575.75, 324.25)
+scale = Vector2(3.835, 3.87798)
+texture = ExtResource("2_hbfth")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="level" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.517184, 0.517184, 0.517184, 1)
+theme_override_font_sizes/font_size = 50
+text = "LEVELS"
+horizontal_alignment = 1
+
+[node name="Level 1" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Level 1"
+
+[node name="Level 2" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Level 2"
+
+[node name="Level 3" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Level 3"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Level 1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Level 2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Level 3" to="." method="_on_level_3_pressed"]
